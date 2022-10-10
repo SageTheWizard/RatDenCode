@@ -1,0 +1,3 @@
+# Rat Den Discord Server code
+Repo to store / version control game mods and what not for the discord server
+Bots and what not end up here too...
