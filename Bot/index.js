@@ -5,6 +5,7 @@ const Drawing = require('./customLibs/drawing.js')
 const OSRS = require('./customLibs/runescape.js')
 
 require('dotenv').config()
+
 // Stuff for Discord API
 const { Client, GatewayIntentBits } = require('discord.js')
 const { REST, SlashCommandBuilder, Routes } = require('discord.js')
@@ -12,25 +13,25 @@ const rest = new REST({ version: '10' }).setToken(process.env.BotToken);
 
 // Command Registering
 const commands = [
-	new SlashCommandBuilder().setName('despa').setDescription('cito'),
+    new SlashCommandBuilder().setName('despa').setDescription('cito'),
     new SlashCommandBuilder().setName('lunks_gpa').setDescription('Get Lunks GPA'),
     new SlashCommandBuilder().setName('daily_dose').setDescription("Get a daily dose of DRIP"),
     new SlashCommandBuilder().setName('roll').setDescription("Play Craps with Friends"),
     new SlashCommandBuilder()
         .setName('osrs_price')
         .setDescription("Get a price of an OSRS item")
-        .addStringOption(option => 
+        .addStringOption(option =>
             option.setName("item")
                 .setDescription("OSRS item name")
                 .setRequired(true)),
     new SlashCommandBuilder()
         .setName("rng")
         .setDescription("roll a random number between \"low\" and \"high\" value")
-        .addIntegerOption(option => 
+        .addIntegerOption(option =>
             option.setName("low")
                 .setDescription("Lowest value for random numbers")
-                .setRequired(true))    
-        .addIntegerOption(option => 
+                .setRequired(true))
+        .addIntegerOption(option =>
             option.setName("high")
                 .setDescription("Highest value for random numbers")
                 .setRequired(true))
@@ -38,11 +39,11 @@ const commands = [
 ].map(command => command.toJSON())
 
 rest.put(Routes.applicationGuildCommands(process.env.BotID, process.env.RatDenID), { body: commands })
-	.then((data) => console.log(`Successfully registered ${data.length} application commands.`))
-	.catch(console.error);
+    .then((data) => console.log(`Successfully registered ${data.length} application commands.`))
+    .catch(console.error);
 
 // Client Init
-const client = new Discord.Client({ intents: [GatewayIntentBits.Guilds]})
+const client = new Discord.Client({ intents: [GatewayIntentBits.Guilds] })
 
 
 // Main Code
@@ -54,7 +55,7 @@ client.on('ready', () => {
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return
 
-	const { commandName } = interaction
+    const { commandName } = interaction
     CommandHandler.executeCommand(commandName, interaction)
 })
 
@@ -87,7 +88,7 @@ function initializeCommandHandler() {
         let low = interaction.options.getInteger("low")
         let high = interaction.options.getInteger("high")
         let delta = high - low
-        let value = Math.floor(Math.random() * delta ) + low 
+        let value = Math.floor(Math.random() * delta) + low
         await interaction.reply("RNG between " + low + " and " + high + ": **" + value + "**")
 
     })
@@ -107,11 +108,11 @@ function initializeCommandHandler() {
 
             let GP = dataJSON["price"]
             let trend = dataJSON["trend"]
-        
+
             console.log("ITEM: " + item + " GP: " + GP + " TREND: " + trend)
 
             let replyStr = "Price for " + item + ": " + GP + " GP." + "\n"
-            replyStr    += "Today the price has gone "
+            replyStr += "Today the price has gone "
             if (trend === "positive") {
                 replyStr += "UP!"
             }
@@ -124,7 +125,7 @@ function initializeCommandHandler() {
             return replyStr
         })
         await interaction.reply(replyStr)
-    }) 
+    })
 }
 
 client.login(process.env.BotToken)

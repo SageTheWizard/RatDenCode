@@ -7,41 +7,41 @@
 --
 
 function QualifiesForGovernmentAssistance(blue)
-	local productionTable = {nil, nil}
-	
-	if table.find(blue.Categories, 'TECH1') then 
-		productionTable[1] = 1
-		productionTable[2] = 10
-	elseif table.find(blue.Categories, 'TECH2') then 
-		productionTable[1] = 2
-		productionTable[2] = 25
-	elseif table.find(blue.Categories, 'SUBCOMMANDER') then 
-		productionTable[1] = 5
-		productionTable[2] = 2000
-	elseif table.find(blue.Categories, 'TECH3') then
-		productionTable[1] = 3
-		productionTable[2] = 1000
-	elseif table.find(blue.Categories, 'COMMAND') then 
-		productionTable[1] = 200
-		productionTable[2] = 10000
-	end 
-	
-	return productionTable
+    local productionTable = {nil, nil}
+    
+    if table.find(blue.Categories, 'TECH1') then 
+        productionTable[1] = 1
+        productionTable[2] = 10
+    elseif table.find(blue.Categories, 'TECH2') then 
+        productionTable[1] = 2
+        productionTable[2] = 25
+    elseif table.find(blue.Categories, 'SUBCOMMANDER') then 
+        productionTable[1] = 5
+        productionTable[2] = 2000
+    elseif table.find(blue.Categories, 'TECH3') then
+        productionTable[1] = 3
+        productionTable[2] = 1000
+    elseif table.find(blue.Categories, 'COMMAND') then 
+        productionTable[1] = 200
+        productionTable[2] = 10000
+    end 
+    
+    return productionTable
 end
 
 do
     local overridden = ModBlueprints
     function ModBlueprints(blueprints)
-		local MASS_INDX = 1
-		local ENERGY_INDX = 2
-	    overridden(blueprints)
+        local MASS_INDX = 1
+        local ENERGY_INDX = 2
+        overridden(blueprints)
         for id,bp in blueprints.Unit do
-			local isEng = table.find(bp.Categories,'ENGINEER')
-			if isEng then
-				GovAssistance = QualifiesForGovernmentAssistance(bp)
-				bp.Economy.ProductionPerSecondMass = GovAssistance[MASS_INDX]
-				bp.Economy.ProductionPerSecondEnergy = GovAssistance[ENERGY_INDX]
-			end
+            local isEng = table.find(bp.Categories,'ENGINEER')
+            if isEng then
+                GovAssistance = QualifiesForGovernmentAssistance(bp)
+                bp.Economy.ProductionPerSecondMass = GovAssistance[MASS_INDX]
+                bp.Economy.ProductionPerSecondEnergy = GovAssistance[ENERGY_INDX]
+            end
         end
     end
 end
