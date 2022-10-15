@@ -5,14 +5,13 @@ const PORT = 8888;
 
 const express = require('express');
 const app = express();
-const server = require('http').Server(app);
 
 //pre-flight requests
 app.options('/', function (req, res) {
     res.send(200);
 });
 
-server.listen(PORT, DOM1_IP, (err) => {
+app.listen(PORT, DOM1_IP, (err) => {
     if (err) {
         throw err;
     }
