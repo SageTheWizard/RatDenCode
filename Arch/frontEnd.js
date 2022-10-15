@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 
 //pre-flight requests
-app.options('/', function (req, res) {
+app.get('/', function (req, res) {
     res.send(200);
 });
 
