@@ -1,17 +1,20 @@
-const http = require('express');
 const bodyParser = require('body-parser');
+const fs = require('fs')
+const express = require('express');
 
 const DOM1_IP = '192.168.1.12';
-const PORT = 8888;
+const INDEX_PATH = "./webgui.html"
 
-const express = require('express');
+const PORT = 8888;
 const app = express();
 
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
-    res.status = 200
-    res.json({ "despa": "cito" })
+    webpageURL = fs.readFileSync(INDEX_PATH)
+    res.status(200)
+    res.contentType("text/html")
+    res.send(webpageURL)
 });
 
 app.listen(PORT, DOM1_IP, (err) => {
