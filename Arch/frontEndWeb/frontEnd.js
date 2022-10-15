@@ -24,6 +24,9 @@ app.get('/zomboid/', function (req, res) {
     res.send(webpageURL)
 });
 
+app.post('/rest/1/jarvis/', function (req, res) {
+
+})
 app.listen(PORT, DOM1_IP, (err) => {
     if (err) {
         throw err;
