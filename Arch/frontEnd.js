@@ -3,7 +3,7 @@ const fs = require('fs')
 const express = require('express');
 
 const DOM1_IP = '192.168.1.12';
-const INDEX_PATH = "./webgui.html"
+const INDEX_PATH = "./webgui/index.html"
 
 const PORT = 8888;
 const app = express();
