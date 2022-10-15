@@ -10,7 +10,6 @@ const server = require('http').Server(app);
 //pre-flight requests
 app.options('/', function (req, res) {
     res.send(200);
-    res.json({ "despa": "cito" })
 });
 
 server.listen(PORT, DOM1_IP, (err) => {
