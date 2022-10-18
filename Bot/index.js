@@ -48,7 +48,7 @@ rest.put(Routes.applicationGuildCommands(process.env.BotID, process.env.RatDenID
 const client = new Discord.Client({ intents: [GatewayIntentBits.Guilds] })
 // Heartbeat
 function heartbeat() {
-    heartbeatData = {
+    var heartbeatData = {
         "uptime": (new Date()).getTime() - UpTime
     }
     request.post({
