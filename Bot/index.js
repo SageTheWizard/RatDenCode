@@ -55,7 +55,6 @@ function heartbeat() {
         url: "ratden.ga:8888/rest/1/jarvis/",
         body: JSON.stringify(heartbeatData)
     }, function (error, response, body) {
-        console.log("Jarvis Heart Beat" + response.statusCode)
     })
 }
 
