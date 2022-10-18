@@ -29,6 +29,7 @@ app.get('/zomboid/', function (req, res) {
 });
 
 app.post('/rest/1/jarvis/', function (req, res) {
+    console.log(req.body)
     jarvisInfo["uptime"] = req.body["uptime"]
     res.status(200)
     res.send()
