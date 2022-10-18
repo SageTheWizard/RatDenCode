@@ -52,7 +52,7 @@ function heartbeat() {
         "uptime": (new Date()).getTime() - UpTime
     }
     request.post({
-        url: "ratden.ga:8888/rest/1/jarvis/",
+        url: "http://ratden.ga:8888/rest/1/jarvis/",
         body: JSON.stringify(heartbeatData)
     }, function (error, response, body) {
     })
