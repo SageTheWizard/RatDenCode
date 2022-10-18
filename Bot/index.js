@@ -53,8 +53,12 @@ function heartbeat() {
     }
     request.post({
         url: "http://ratden.ga:8888/rest/1/jarvis/",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(heartbeatData)
     }, function (error, response, body) {
+
     })
 }
 
