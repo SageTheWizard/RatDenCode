@@ -12,6 +12,7 @@ const app = express();
 var jarvisInfo = {
     "uptime": 0
 }
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // REST API --- START
