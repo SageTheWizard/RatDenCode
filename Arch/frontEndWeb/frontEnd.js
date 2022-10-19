@@ -29,7 +29,6 @@ app.get('/zomboid/', function (req, res) {
 });
 
 app.post('/rest/1/jarvis/', function (req, res) {
-    console.log(req.body)
     jarvisInfo["uptime"] = req.body["uptime"]
     res.status(200)
     res.send()
@@ -38,7 +37,9 @@ app.post('/rest/1/jarvis/', function (req, res) {
 app.get('/rest/1/jarvis/', function (req, res) {
     res.status(200)
     res.contentType("application/json")
-    res.send(JSON.stringify(jarvisInfo))
+    res.send(JSON.stringify({
+        "uptime": msToString(jarvisInfo["uptime"])
+    }))
 })
 // REST API ---- END
 app.listen(PORT, DOM1_IP, (err) => {
@@ -52,5 +53,11 @@ function msToString(ms) {
     var d, h, m, s
     s = Math.floor(ms / 1000)
     m = Math.floor(s / 60)
+    s = s % 60
+    h = Math.floor(m / 60)
+    m = m % 60
+    d = Math.floor(h / 24)
+    h = h % 24
 
+    return d + "days " + h + " hours" + m + " minutes" + " seconds"
 }

@@ -1,4 +1,24 @@
 <!doctype html>
+<script>
+    function init() {
+        setInterval(() => updateStats(), 1000)
+    }
+    function updateStats() {
+        thisRESTURL = "ratden.ga:8888/rest/1/"
+        var jarvisUp = document.getElementById("jarvis_up")
+        fetch(thisRESTURL, {
+            method: "GET"
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                jarvisUp.innerHTML = data["uptime"]
+            })
+            .catch((error) => {
+                console.error("Error Communicating to Local API\nERROR: " + error)
+                return returnJSON
+            })
+    }
+</script>
 <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@1.0.0/dist/css/bootstrap-dark.min.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -12,7 +32,7 @@
     <title>RatDen</title>
 </head>
 
-<body>
+<body onload="init()">
     <nav class="navbar navbar-expand-lg navbar-themed">
         <a class="navbar-brand" href="http://ratden.ga:8888/">HOME</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -48,7 +68,7 @@
                     <th id="jarvis_id">dom1_0</th>
                     <th id="jarvis_app">Jarvis</th>
                     <th id="jarvis_port">--</th>
-                    <th id="jarvis_up">Under Construction</th>
+                    <th id="jarvis_up"></th>
                 </tr>
                 <tr>
                     <th id="frontend_id">dom1_1</th>
