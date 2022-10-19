@@ -4,7 +4,7 @@
         setInterval(() => updateStats(), 1000)
     }
     function updateStats() {
-        thisRESTURL = "ratden.ga:8888/rest/1/"
+        thisRESTURL = "http://ratden.ga:8888/rest/1/"
         var jarvisUp = document.getElementById("jarvis_up")
         fetch(thisRESTURL, {
             method: "GET"
