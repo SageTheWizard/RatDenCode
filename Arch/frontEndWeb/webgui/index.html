@@ -6,7 +6,7 @@
     function updateStats() {
         thisRESTURL = "http://ratden.ga:8888/rest/1/"
         var jarvisUp = document.getElementById("jarvis_up")
-        fetch(thisRESTURL, {
+        fetch(thisRESTURL + "jarvis/", {
             method: "GET"
         })
             .then((response) => response.json())
