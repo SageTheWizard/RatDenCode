@@ -59,5 +59,5 @@ function msToString(ms) {
     d = Math.floor(h / 24)
     h = h % 24
 
-    return d + "days " + h + " hours" + m + " minutes" + " seconds"
+    return d + "days " + h + "hours" + m + "minutes " + s + "seconds"
 }
