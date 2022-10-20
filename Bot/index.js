@@ -3,6 +3,7 @@ const Discord = require('discord.js')
 const CommandHandler = require("./commandHandler.js")
 const Drawing = require('./customLibs/drawing.js')
 const OSRS = require('./customLibs/runescape.js')
+const request = require('request')
 
 require('dotenv').config()
 
@@ -10,6 +11,7 @@ require('dotenv').config()
 const { Client, GatewayIntentBits } = require('discord.js')
 const { REST, SlashCommandBuilder, Routes } = require('discord.js')
 const rest = new REST({ version: '10' }).setToken(process.env.BotToken);
+var UpTime;
 
 // Command Registering
 const commands = [
@@ -44,11 +46,28 @@ rest.put(Routes.applicationGuildCommands(process.env.BotID, process.env.RatDenID
 
 // Client Init
 const client = new Discord.Client({ intents: [GatewayIntentBits.Guilds] })
+// Heartbeat
+function heartbeat() {
+    var heartbeatData = {
+        "uptime": (new Date()).getTime() - UpTime
+    }
+    request.post({
+        url: "http://ratden.ga:8888/rest/1/jarvis/",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(heartbeatData)
+    }, function (error, response, body) {
 
+    })
+}
 
 // Main Code
 client.on('ready', () => {
     initializeCommandHandler()
+    UpTime = new Date().getTime();
+    setInterval(() => heartbeat(), 1000)
+
     console.log(`Logged in as ${client.user.tag}!`)
 })
 
