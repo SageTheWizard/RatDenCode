@@ -5,6 +5,13 @@ const Drawing = require('./customLibs/drawing.js')
 const OSRS = require('./customLibs/runescape.js')
 const request = require('request')
 
+import { Configuration, OpenAIApi } from "openai"
+const configuration = new Configuration({
+    organization: "Personal",
+    apiKey: process.env.OPENAI_API_KEY
+})
+const openai = OpenAIApi(configuration)
+
 require('dotenv').config()
 
 // Stuff for Discord API
@@ -74,6 +81,13 @@ client.on('ready', () => {
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return
 
+    var user = interaction.user.id;
+    // if Ag requests Jarvis to do something
+    // Reject his request, because he no love
+    if (user === "720420498701287465") {
+        await interaction.reply("You no love, Island Individual!")
+        return;
+    }
     const { commandName } = interaction
     CommandHandler.executeCommand(commandName, interaction)
 })
